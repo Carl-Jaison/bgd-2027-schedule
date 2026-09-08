@@ -326,6 +326,207 @@ main {
 }
 .add-row-btn:hover { border-color: var(--brass); color: var(--brass-dark); }
 
+/* ---------------- Timeline (staggered) view — Day 2/3 ---------------- */
+
+.timeline-wrap {
+  position: relative;
+  display: flex;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+}
+
+.timeline-axis {
+  position: relative;
+  width: 64px;
+  flex: 0 0 64px;
+  background: #F8F9FB;
+  border-right: 1px solid var(--line);
+}
+.axis-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translateY(-6px);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: #AEB7C2;
+  text-align: center;
+}
+.axis-label.hour { color: var(--ink-soft); font-weight: 600; }
+
+.timeline-cols {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.timeline-col {
+  flex: 1 1 0;
+  min-width: 0;
+  border-right: 1px solid var(--line);
+}
+.timeline-col:last-child { border-right: none; }
+
+.col-head {
+  height: 54px;
+  padding: 8px 10px;
+  color: #fff;
+  font-family: 'Fraunces', serif;
+}
+.col-head .hall-name { display: block; font-size: 14px; font-weight: 600; }
+.col-head .track-name { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10.5px; opacity: 0.9; margin-top: 1px; }
+
+.col-body {
+  position: relative;
+}
+
+.gridline {
+  position: absolute;
+  left: 0; right: 0;
+  border-top: 1px solid #EEF1F4;
+  height: 0;
+}
+.gridline.hour { border-top: 1px solid #E2E7ED; }
+
+.block {
+  position: absolute;
+  left: 4px; right: 4px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 5px 7px 22px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+.block-session {
+  background: #fff;
+  border-left: 4px solid #ccc;
+  box-shadow: 0 1px 3px rgba(18,33,58,0.08);
+}
+.block-break {
+  background: #EFEDE6;
+  border-left: 4px dashed #C7BFA9;
+  color: #6b6350;
+  font-style: italic;
+}
+
+.block-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  outline: none;
+}
+.block-title {
+  margin-top: 2px;
+  outline: none;
+  color: var(--ink);
+}
+.block-title:empty::before {
+  content: attr(data-placeholder);
+  color: #9AA5B2;
+  font-style: italic;
+}
+.block-session:focus-within, .block-break:focus-within {
+  box-shadow: inset 0 0 0 2px var(--brass), 0 1px 3px rgba(18,33,58,0.08);
+}
+
+.theme-select-inline {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  right: 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  border: none;
+  border-radius: 3px;
+  padding: 2px 4px;
+  color: #fff;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.block-delete, .shared-delete {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border: none;
+  background: transparent;
+  color: #B0392F;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.block-delete:hover, .shared-delete:hover { color: var(--danger); }
+
+.add-block-btn {
+  position: absolute;
+  left: 4px; right: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px;
+  border: 1px dashed #B7C0CC;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.add-block-btn:hover { border-color: var(--brass); color: var(--brass-dark); }
+
+.timeline-shared {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  pointer-events: none;
+}
+.shared-block {
+  position: absolute;
+  left: 0; right: 0;
+  background: #E9E4D6;
+  border-top: 2px solid var(--brass);
+  border-bottom: 2px solid var(--brass);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  pointer-events: auto;
+  z-index: 5;
+}
+.shared-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #5B5240;
+  outline: none;
+  flex: 0 0 auto;
+}
+.shared-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8b8368;
+  outline: none;
+  flex: 0 0 auto;
+}
+.shared-text {
+  font-style: italic;
+  font-size: 14px;
+  color: #3d3826;
+  outline: none;
+  flex: 1 1 auto;
+}
+.shared-time:focus, .shared-tag:focus, .shared-text:focus {
+  background: #fff; box-shadow: inset 0 0 0 2px var(--brass);
+}
+
+/* ---------------- Simple table (Day 1) ---------------- */
+
+.simple-table { width: 100%; border-collapse: collapse; background: var(--paper-raised); border: 1px solid var(--line); }
+.simple-table .time-cell { width: 140px; }
+
 /* ---------------- Legend ---------------- */
 
 .legend {
@@ -369,24 +570,34 @@ main {
 body.view-only .session-cell,
 body.view-only .plenary-cell,
 body.view-only .time-cell,
-body.view-only th.editable-head {
+body.view-only .block-time,
+body.view-only .block-title,
+body.view-only .shared-time,
+body.view-only .shared-tag,
+body.view-only .shared-text {
   cursor: default;
 }
-body.view-only .theme-select { pointer-events: none; }
+body.view-only .theme-select,
+body.view-only .theme-select-inline { pointer-events: none; }
 body.view-only .row-controls,
-body.view-only .add-row-bar { display: none; }
+body.view-only .add-row-bar,
+body.view-only .add-block-btn,
+body.view-only .block-delete,
+body.view-only .shared-delete { display: none; }
 
 /* ---------------- Print ---------------- */
 
 @media print {
   @page { size: landscape; margin: 10mm; }
   .masthead, .daytabs .daytab:not(.active), .add-row-bar, .row-controls,
-  .legend, .foot-note, .masthead-actions { display: none !important; }
+  .legend, .foot-note, .masthead-actions, .add-block-btn, .block-delete, .shared-delete {
+    display: none !important;
+  }
   .daytabs { display: none; }
   .day-panel { display: block !important; page-break-after: always; }
   body { background: #fff; }
-  .schedule-table { border: 1px solid #999; }
-  .session-cell, .plenary-cell, .time-cell { box-shadow: none !important; }
+  .schedule-table, .timeline-wrap { border: 1px solid #999; }
+  .session-cell, .plenary-cell, .time-cell, .block, .shared-block { box-shadow: none !important; }
 }
 
 /* ---------------- Responsive ---------------- */
@@ -394,5 +605,6 @@ body.view-only .add-row-bar { display: none; }
 @media (max-width: 900px) {
   main { overflow-x: auto; }
   .schedule-table { min-width: 1100px; }
+  .timeline-wrap { min-width: 1100px; }
   .legend { grid-template-columns: 1fr; }
 }
